@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/codeRootLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingHorizontal="12dp"
+    android:paddingVertical="18dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/flagIv"
+        android:layout_width="35dp"
+        android:layout_height="24dp"
+        android:scaleType="centerCrop"
+        android:importantForAccessibility="no"
+        app:shapeAppearanceOverlay="@style/SpecificCornerRounded"
+        app:srcCompat="@drawable/flag_armenia" />
+
+    <TextView
+        android:id="@+id/codeNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:textColor="@color/primaryColor"
+        android:textSize="13sp"
+        tools:text="(AM)" />
+
+    <TextView
+        android:id="@+id/phoneCodeTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:textColor="@color/primaryColor"
+        android:textSize="13sp"
+        tools:text="+374" />
+
+    <ImageView
+        android:id="@+id/arrowIv"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="12dp"
+        android:importantForAccessibility="no"
+        app:srcCompat="@drawable/ic_arrow_drop_down" />
+</LinearLayout>
