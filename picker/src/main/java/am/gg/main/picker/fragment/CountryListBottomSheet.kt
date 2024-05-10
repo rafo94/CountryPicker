@@ -1,6 +1,5 @@
 package am.gg.main.picker.fragment
 
-import am.gg.main.picker.R
 import am.gg.main.picker.adapter.CountryPickerAdapter
 import am.gg.main.picker.databinding.FragmentCountryPickerBinding
 import am.gg.main.picker.model.CountryItem
