@@ -4,6 +4,7 @@ import am.gg.main.picker.databinding.LayoutCodePickerBinding
 import am.gg.main.picker.fragment.CountryListBottomSheet
 import am.gg.main.picker.model.CountryItem
 import am.gg.main.picker.utils.CountryListManager.countryList
+import am.gg.main.picker.utils.hideKeyboard
 import am.gg.main.picker.utils.setCountryList
 import android.content.Context
 import android.util.AttributeSet
@@ -101,6 +102,7 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) : LinearLa
         }
         binding?.apply {
             root.setOnClickListener {
+                hideKeyboard()
                 if (countryList.isNotEmpty()) {
                     val countryList = countryList.sortedBy { it.countryName }.toMutableList()
                     fragment = CountryListBottomSheet().apply {
