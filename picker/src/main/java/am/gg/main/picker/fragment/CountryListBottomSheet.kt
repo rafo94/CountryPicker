@@ -54,6 +54,7 @@ class CountryListBottomSheet : BottomSheetDialogFragment() {
             rvCountryList.adapter = adapter
             adapter?.submitList(countryList)
             etSearch.addTextChangedListener { text ->
+                countrySortList.clear()
                 val countryText = text.toString().trim()
                 if (countryText.isNotEmpty() && countryText.isNotBlank()) {
                     countryList.forEach { country ->
