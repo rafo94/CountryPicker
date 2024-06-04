@@ -4,6 +4,7 @@ import am.gg.main.picker.adapter.CountryPickerAdapter
 import am.gg.main.picker.databinding.FragmentCountryPickerBinding
 import am.gg.main.picker.model.CountryItem
 import am.gg.main.picker.utils.getDisplayHeightByPercent
+import am.gg.main.picker.utils.showKeyboard
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -52,6 +53,7 @@ class CountryListBottomSheet : BottomSheetDialogFragment() {
         binding?.apply {
             rvCountryList.adapter = adapter
             adapter?.submitList(countryList)
+            etSearch.showKeyboard()
             etSearch.addTextChangedListener { text ->
                 if (countrySortList.isNotEmpty()) countrySortList.clear()
                 val countryText = text.toString().trim()

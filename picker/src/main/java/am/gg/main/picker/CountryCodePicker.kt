@@ -6,6 +6,7 @@ import am.gg.main.picker.model.CountryItem
 import am.gg.main.picker.utils.CountryListManager.countryList
 import am.gg.main.picker.utils.hideKeyboard
 import am.gg.main.picker.utils.setCountryList
+import am.gg.main.picker.utils.unwrap
 import android.content.Context
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -15,7 +16,6 @@ import androidx.annotation.FontRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isGone
-import androidx.fragment.app.FragmentActivity
 import java.util.Locale
 
 
@@ -109,7 +109,11 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) : LinearLa
                         setClickListener(list = countryList, selectedId = codeNameTv.text.toString()) {
                             onCountryItemClick(it)
                         }
-                    }.also { it.show((context as FragmentActivity).supportFragmentManager, it::class.java.simpleName) }
+                    }.also {
+                        unwrap(context)?.let { activity ->
+                            it.show(activity.supportFragmentManager, it::class.java.simpleName)
+                        }
+                    }
                 }
             }
         }
