@@ -28,7 +28,7 @@
         android:gravity="center_vertical"
         android:singleLine="true"
         android:textColor="@color/primaryColor"
-        android:textSize="13sp"
+        android:textSize="22sp"
         tools:text="(AM)" />
 
     <TextView
@@ -40,7 +40,7 @@
         android:gravity="center_vertical"
         android:singleLine="true"
         android:textColor="@color/primaryColor"
-        android:textSize="13sp"
+        android:textSize="22sp"
         tools:text="+374" />
 
     <ImageView

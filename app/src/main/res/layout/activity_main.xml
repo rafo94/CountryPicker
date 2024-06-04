@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <TextView
@@ -27,7 +28,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/background_gray_round_10"
         android:gravity="center"
-        app:contentColor="@color/white"
+        app:contentColor="@color/primaryColor"
         app:defaultNameCode="AM"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_phone_no"
@@ -58,4 +59,21 @@
         app:layout_constraintStart_toEndOf="@id/countryPicker"
         app:layout_constraintTop_toTopOf="@id/countryPicker"
         tools:ignore="LabelFor" />
+
+    <am.gg.main.countrypicker.progressbutton.ProgressButton
+        android:id="@+id/progressButton"
+        android:layout_width="0dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:btn_elevation="0dp"
+        app:btn_text_size="20sp"
+        app:corner_radius="10dp"
+        app:default_color="@color/primaryColor"
+        app:default_text="Send"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
