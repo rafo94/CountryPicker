@@ -30,7 +30,7 @@ fun View.hideKeyboard() {
 
 fun unwrap(context: Context): FragmentActivity? {
     var mContext: Context? = context
-    while (context !is Activity && context is ContextWrapper) {
+    if (context !is Activity && context is ContextWrapper) {
         mContext = context.baseContext
     }
 

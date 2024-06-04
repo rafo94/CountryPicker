@@ -110,7 +110,7 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) : LinearLa
                             onCountryItemClick(it)
                         }
                     }.also {
-                        unwrap(context)?.let { activity ->
+                        unwrap(root.context)?.let { activity ->
                             it.show(activity.supportFragmentManager, it::class.java.simpleName)
                         }
                     }
