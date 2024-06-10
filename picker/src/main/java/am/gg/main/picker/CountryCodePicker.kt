@@ -50,8 +50,7 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) : LinearLa
             try {
                 showFlag = getBoolean(R.styleable.CountryCodePicker_showFlag, true)
                 defaultCountry = getString(R.styleable.CountryCodePicker_defaultNameCode).toString()
-                excludedCountries =
-                    getString(R.styleable.CountryCodePicker_excludedCountries).toString()
+                excludedCountries = getString(R.styleable.CountryCodePicker_excludedCountries).toString()
                 showCodeName = getBoolean(R.styleable.CountryCodePicker_showNameCode, true)
                 showPhoneCode = getBoolean(R.styleable.CountryCodePicker_showPhoneCode, true)
                 showDropDownArrow = getBoolean(R.styleable.CountryCodePicker_showArrowDown, true)
@@ -160,6 +159,16 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) : LinearLa
             if (item.codeName?.equals(codeName) == true) {
                 item.flagImage?.let { flagIv.setImageResource(it) }
                 item.phoneCode?.let { phoneCodeTv.text = it }
+                item.codeName.let { codeNameTv.text = "($it)" }
+            }
+        }
+    }
+
+    fun setPhoneCode(countryCode: String) = binding?.apply {
+        for (item in countryList) {
+            if (item.phoneCode?.equals(countryCode) == true) {
+                item.flagImage?.let { flagIv.setImageResource(it) }
+                item.phoneCode.let { phoneCodeTv.text = it }
                 item.codeName.let { codeNameTv.text = "($it)" }
             }
         }

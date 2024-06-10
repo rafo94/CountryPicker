@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.progressButton.disable()
         binding.numberEt.setText(binding.countryPicker.selectedCountryCode())
+        binding.countryPicker.setPhoneCode("+374")
         phoneCode = binding.countryPicker.selectedCountryCode()
         binding.countryPicker.setOnItemClick {
             phoneCode = it.phoneCode
