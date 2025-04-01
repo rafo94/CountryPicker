@@ -4,7 +4,6 @@ import am.gg.main.picker.R
 import am.gg.main.picker.model.CountryItem
 import am.gg.main.picker.utils.CountryListManager.countryList
 
-
 /**
  * Created by Rafik Gasparyan on 08.05.24
  * ggTeam
@@ -69,7 +68,7 @@ fun setCountryList() {
         CountryItem("Cote d'Ivoire", "+225", "CI", R.drawable.flag_cote_divoire),
         CountryItem("Croatia", "+385", "HR", R.drawable.flag_croatia),
         CountryItem("Cuba", "+53", "CU", R.drawable.flag_cuba),
-        CountryItem("Cyprus", "+537", "CY", R.drawable.flag_cyprus),
+        CountryItem("Cyprus", "+357", "CY", R.drawable.flag_cyprus),
         CountryItem("Czech Republic", "+420", "CZ", R.drawable.flag_czech_republic),
         CountryItem("Denmark", "+45", "DK", R.drawable.flag_denmark),
         CountryItem("Djibouti", "+253", "DJ", R.drawable.flag_djibouti),
@@ -103,7 +102,7 @@ fun setCountryList() {
         CountryItem("Guernsey", "+44", "GG", R.drawable.flag_guernsey),
         CountryItem("Guinea", "+224", "GN", R.drawable.flag_guinea),
         CountryItem("Guinea-Bissau", "+245", "GW", R.drawable.flag_guinea_bissau),
-        CountryItem("Guyana", "+595", "GY", R.drawable.flag_guyana),
+        CountryItem("Guyana", "+592", "GY", R.drawable.flag_guyana),
         CountryItem("Haiti", "+509", "HT", R.drawable.flag_haiti),
         CountryItem("Holy See (Vatican City State)", "+379", "VA", R.drawable.flag_vatican_city),
         CountryItem("Honduras", "+504", "HN", R.drawable.flag_honduras),
@@ -122,7 +121,7 @@ fun setCountryList() {
         CountryItem("Japan", "+81", "JP", R.drawable.flag_japan),
         CountryItem("Jersey", "+44", "JE", R.drawable.flag_jersey),
         CountryItem("Jordan", "+962", "JO", R.drawable.flag_jordan),
-        CountryItem("Kazakhstan", "+7 7", "KZ", R.drawable.flag_kazakhstan),
+        CountryItem("Kazakhstan", "+7", "KZ", R.drawable.flag_kazakhstan),
         CountryItem("Kenya", "+254", "KE", R.drawable.flag_kenya),
         CountryItem("Kiribati", "+686", "KI", R.drawable.flag_kiribati),
         CountryItem("Korea, Democratic People's Republic of", "+850", "KP", R.drawable.flag_north_korea),

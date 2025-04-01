@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "am.gg.main.picker"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 23
@@ -55,7 +55,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "am.gg"
                 artifactId = "CountryPicker"
-                version = "1.0.8"
+                version = "1.0.9"
             }
         }
     }
