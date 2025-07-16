@@ -12,6 +12,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.widget.LinearLayout
+import androidx.annotation.ColorRes
 import androidx.annotation.FontRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -150,18 +151,36 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) :
         fragment?.dismiss()
     }
 
-    private fun setContentColor(color: Int) = binding?.apply {
-        phoneCodeTv.setTextColor(ContextCompat.getColor(context, color))
-        codeNameTv.setTextColor(ContextCompat.getColor(context, color))
+    fun setContentColor(@ColorRes color: Int) {
+        binding?.apply {
+            phoneCodeTv.setTextColor(ContextCompat.getColor(context, color))
+            codeNameTv.setTextColor(ContextCompat.getColor(context, color))
+        }
     }
 
-    private fun setArrowColor(color: Int) = binding?.apply {
-        arrowIv.setColorFilter(ContextCompat.getColor(context, color))
+    fun setBacGroundColor(@ColorRes color: Int) {
+        backGroundColor = color
     }
 
-    private fun setTypeFace(@FontRes font: Int) = binding?.apply {
-        phoneCodeTv.typeface = ResourcesCompat.getFont(context, font)
-        codeNameTv.typeface = ResourcesCompat.getFont(context, font)
+    fun setSearchIconColor(@ColorRes color: Int) {
+        searchIconColor = color
+    }
+
+    fun setSearchBackgroundColor(@ColorRes color: Int) {
+        searchColor = color
+    }
+
+    fun setArrowColor(@ColorRes color: Int) {
+        binding?.apply {
+            arrowIv.setColorFilter(ContextCompat.getColor(context, color))
+        }
+    }
+
+    private fun setTypeFace(@FontRes font: Int) {
+        binding?.apply {
+            phoneCodeTv.typeface = ResourcesCompat.getFont(context, font)
+            codeNameTv.typeface = ResourcesCompat.getFont(context, font)
+        }
     }
 
     private fun hideFlag() {
@@ -180,22 +199,26 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) :
         binding?.arrowIv?.isGone = true
     }
 
-    private fun setDefaultCountry(codeName: String) = binding?.apply {
-        for (item in countryList) {
-            if (item.codeName?.equals(codeName) == true) {
-                item.flagImage?.let { flagIv.setImageResource(it) }
-                item.phoneCode?.let { phoneCodeTv.text = it }
-                item.codeName.let { codeNameTv.text = "($it)" }
+    private fun setDefaultCountry(codeName: String) {
+        binding?.apply {
+            for (item in countryList) {
+                if (item.codeName?.equals(codeName) == true) {
+                    item.flagImage?.let { flagIv.setImageResource(it) }
+                    item.phoneCode?.let { phoneCodeTv.text = it }
+                    item.codeName.let { codeNameTv.text = "($it)" }
+                }
             }
         }
     }
 
-    fun setPhoneCode(countryCode: String) = binding?.apply {
-        for (item in countryList) {
-            if (item.phoneCode?.equals(countryCode) == true) {
-                item.flagImage?.let { flagIv.setImageResource(it) }
-                item.phoneCode.let { phoneCodeTv.text = it }
-                item.codeName.let { codeNameTv.text = "($it)" }
+    fun setPhoneCode(countryCode: String) {
+        binding?.apply {
+            for (item in countryList) {
+                if (item.phoneCode?.equals(countryCode) == true) {
+                    item.flagImage?.let { flagIv.setImageResource(it) }
+                    item.phoneCode.let { phoneCodeTv.text = it }
+                    item.codeName.let { codeNameTv.text = "($it)" }
+                }
             }
         }
     }

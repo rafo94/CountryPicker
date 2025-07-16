@@ -28,6 +28,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.numberEt.setText(binding.countryPicker.selectedCountryCode())
         binding.countryPicker.setPhoneCode("+374")
+        binding.countryPicker.setContentColor(R.color.black)
+        binding.countryPicker.setArrowColor(R.color.red)
+        binding.countryPicker.setBacGroundColor(R.color.black)
+        binding.countryPicker.setSearchIconColor(R.color.green_500)
+        binding.countryPicker.setSearchBackgroundColor(R.color.gray)
         phoneCode = binding.countryPicker.selectedCountryCode()
 
         binding.numberEt.addTextChangedListener { s ->

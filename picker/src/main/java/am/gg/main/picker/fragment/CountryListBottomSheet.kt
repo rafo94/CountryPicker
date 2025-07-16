@@ -32,7 +32,7 @@ class CountryListBottomSheet : BottomSheetDialogFragment() {
     private var backGroundColor: Int = 0
     private var textColor: Int = 0
     private var searchIconColor: Int = 0
-    private var searchColor:Int=0
+    private var searchColor: Int = 0
 
 
     override fun onCreateView(
@@ -97,11 +97,11 @@ class CountryListBottomSheet : BottomSheetDialogFragment() {
         }
     }
 
-    fun setViewsColors(backGroundColor: Int, textColor: Int, searchIconColor: Int,searchColor:Int) {
+    fun setViewsColors(backGroundColor: Int, textColor: Int, searchIconColor: Int, searchColor: Int) {
         this.backGroundColor = backGroundColor
         this.textColor = textColor
         this.searchIconColor = searchIconColor
-        this.searchColor=searchColor
+        this.searchColor = searchColor
     }
 
     fun setClickListener(
@@ -116,11 +116,6 @@ class CountryListBottomSheet : BottomSheetDialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        dialog?.let {
-            val bottomSheet =
-                it.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-            bottomSheet.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
-        }
         (dialog as BottomSheetDialog).behavior.peekHeight =
             requireContext().getDisplayHeightByPercent(85)
     }
