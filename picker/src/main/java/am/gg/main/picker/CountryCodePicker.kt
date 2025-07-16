@@ -75,7 +75,7 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) :
                     R.color.primaryColor
                 )
                 searchColor =
-                    getResourceId(R.styleable.CountryCodePicker_searchColor, R.color.primaryColor)
+                    getResourceId(R.styleable.CountryCodePicker_searchColor, R.color.gray_1)
             } finally {
                 recycle()
             }
@@ -90,7 +90,7 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) :
         }
 
         setContentColor(if (color > 0) color else R.color.white)
-        setArrowColor(if (color > 0) arrowIvColor else R.color.white)
+        setArrowColor(if (arrowIvColor > 0) arrowIvColor else R.color.primaryColor)
         if (arrowSize > 0) {
             setArrowSize(arrowSize)
         }
