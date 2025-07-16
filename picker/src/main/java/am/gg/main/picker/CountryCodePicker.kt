@@ -23,7 +23,8 @@ import java.util.Locale
  * Created by Rafik Gasparyan on 08.05.24
  * ggTeam
  */
-class CountryCodePicker(context: Context, attributeSet: AttributeSet) : LinearLayout(context, attributeSet) {
+class CountryCodePicker(context: Context, attributeSet: AttributeSet) :
+    LinearLayout(context, attributeSet) {
     private var binding: LayoutCodePickerBinding? = null
     private var fragment: CountryListBottomSheet? = null
     private var color: Int = 0
@@ -36,6 +37,11 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) : LinearLa
     private var excludedCountries: String = ""
     private var textSize = 0
     private var arrowSize = 0
+    private var arrowIvColor: Int = 0
+    private var backGroundColor: Int = 0
+    private var textColor: Int = 0
+    private var searchIconColor: Int = 0
+    private var searchColor:Int=0
 
     private var itemClick: (CountryItem) -> Unit = { }
 
@@ -50,7 +56,8 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) : LinearLa
             try {
                 showFlag = getBoolean(R.styleable.CountryCodePicker_showFlag, true)
                 defaultCountry = getString(R.styleable.CountryCodePicker_defaultNameCode).toString()
-                excludedCountries = getString(R.styleable.CountryCodePicker_excludedCountries).toString()
+                excludedCountries =
+                    getString(R.styleable.CountryCodePicker_excludedCountries).toString()
                 showCodeName = getBoolean(R.styleable.CountryCodePicker_showNameCode, true)
                 showPhoneCode = getBoolean(R.styleable.CountryCodePicker_showPhoneCode, true)
                 showDropDownArrow = getBoolean(R.styleable.CountryCodePicker_showArrowDown, true)
@@ -58,6 +65,11 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) : LinearLa
                 fontFamilyId = getResourceId(R.styleable.CountryCodePicker_android_fontFamily, 0)
                 textSize = getDimensionPixelSize(R.styleable.CountryCodePicker_textSize, 0)
                 arrowSize = getDimensionPixelSize(R.styleable.CountryCodePicker_arrowSize, 0)
+                arrowIvColor = getResourceId(R.styleable.CountryCodePicker_arrowColor, 0)
+                backGroundColor = getResourceId(R.styleable.CountryCodePicker_backGroundColor, R.color.white)
+                textColor = getResourceId(R.styleable.CountryCodePicker_textColor, R.color.primaryColor)
+                searchIconColor = getResourceId(R.styleable.CountryCodePicker_searchIconColor, R.color.primaryColor)
+                searchColor = getResourceId(R.styleable.CountryCodePicker_searchColor, R.color.primaryColor)
             } finally {
                 recycle()
             }
@@ -72,7 +84,7 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) : LinearLa
         }
 
         setContentColor(if (color > 0) color else R.color.white)
-
+        setArrowColor(if (color > 0) arrowIvColor else R.color.white)
         if (arrowSize > 0) {
             setArrowSize(arrowSize)
         }
@@ -105,9 +117,13 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) : LinearLa
                 if (countryList.isNotEmpty()) {
                     val countryList = countryList.sortedBy { it.countryName }.toMutableList()
                     fragment = CountryListBottomSheet().apply {
-                        setClickListener(list = countryList, selectedId = codeNameTv.text.toString()) {
+                        setClickListener(
+                            list = countryList,
+                            selectedId = codeNameTv.text.toString()
+                        ) {
                             onCountryItemClick(it)
                         }
+                        setViewsColors(backGroundColor,textColor,searchIconColor,searchColor)
                     }.also {
                         unwrap(root.context)?.let { activity ->
                             it.show(activity.supportFragmentManager, it::class.java.simpleName)
@@ -131,6 +147,10 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) : LinearLa
     private fun setContentColor(color: Int) = binding?.apply {
         phoneCodeTv.setTextColor(ContextCompat.getColor(context, color))
         codeNameTv.setTextColor(ContextCompat.getColor(context, color))
+    }
+
+    private fun setArrowColor(color: Int) = binding?.apply {
+        arrowIv.setColorFilter(ContextCompat.getColor(context, color))
     }
 
     private fun setTypeFace(@FontRes font: Int) = binding?.apply {
