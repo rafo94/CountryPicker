@@ -55,7 +55,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "am.gg"
                 artifactId = "CountryPicker"
-                version = "1.1.4"
+                version = "1.1.5"
             }
         }
     }

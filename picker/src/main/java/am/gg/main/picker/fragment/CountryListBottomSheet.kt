@@ -1,16 +1,19 @@
 package am.gg.main.picker.fragment
 
+import am.gg.main.picker.R
 import am.gg.main.picker.adapter.CountryPickerAdapter
 import am.gg.main.picker.databinding.FragmentCountryPickerBinding
 import am.gg.main.picker.model.CountryItem
 import am.gg.main.picker.utils.getDisplayHeightByPercent
 import am.gg.main.picker.utils.showKeyboard
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -114,9 +117,26 @@ class CountryListBottomSheet : BottomSheetDialogFragment() {
         this.selectedId = selectedId
     }
 
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.RoundedCornerTransparentBottomSheetDialogTheme)
+        bottomSheetDialog.apply {
+            behavior.isDraggable = true
+            behavior.isHideable = true
+            behavior.state = BottomSheetBehavior.STATE_EXPANDED
+            behavior.skipCollapsed = true
+        }
+        return bottomSheetDialog
+    }
+
     override fun onStart() {
         super.onStart()
-        (dialog as BottomSheetDialog).behavior.peekHeight =
-            requireContext().getDisplayHeightByPercent(85)
+        val dialog = dialog as? BottomSheetDialog ?: return
+
+        dialog.let {
+            val bottomSheet =
+                it.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+            bottomSheet?.layoutParams?.height = ViewGroup.LayoutParams.MATCH_PARENT
+        }
+        dialog.behavior.peekHeight = requireContext().getDisplayHeightByPercent(95)
     }
 }
