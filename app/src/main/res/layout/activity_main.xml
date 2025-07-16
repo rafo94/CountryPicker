@@ -28,14 +28,21 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/background_gray_round_10"
         android:gravity="center"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="18dp"
+        app:arrowColor="@color/red"
+        app:backGroundColor="@color/black"
         app:contentColor="@color/primaryColor"
         app:defaultNameCode="AM"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_phone_no"
+        app:searchColor="@color/gray"
+        app:searchIconColor="@color/green_500"
         app:showArrowDown="true"
-        app:showFlag="true"
+        app:showFlag="false"
         app:showNameCode="false"
-        app:showPhoneCode="false" />
+        app:showPhoneCode="true"
+        app:textColor="@color/white" />
 
     <EditText
         android:id="@+id/numberEt"
@@ -72,7 +79,7 @@
         app:btn_text_size="20sp"
         app:corner_radius="10dp"
         app:default_color="@color/primaryColor"
-        app:default_text="Send"
+        app:default_text="Open"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
