@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -28,6 +29,10 @@ class CountryListBottomSheet : BottomSheetDialogFragment() {
     private var itemClick: (CountryItem) -> Unit = {}
     private var countryList = mutableListOf<CountryItem>()
     private val countrySortList = ArrayList<CountryItem>()
+    private var backGroundColor: Int = 0
+    private var textColor: Int = 0
+    private var searchIconColor: Int = 0
+    private var searchColor:Int=0
 
 
     override fun onCreateView(
@@ -46,10 +51,14 @@ class CountryListBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun init() {
-        adapter = CountryPickerAdapter(selectedId = selectedId ?: "AM") { item ->
-            itemClick(item)
-        }
-
+        adapter = CountryPickerAdapter(
+            selectedId = selectedId ?: "AM",
+            itemBgColor = backGroundColor,
+            itemTextColor = textColor,
+            itemClick = { item ->
+                itemClick(item)
+            })
+        updateViewColors()
         binding?.apply {
             rvCountryList.adapter = adapter
             adapter?.submitList(countryList)
@@ -73,7 +82,33 @@ class CountryListBottomSheet : BottomSheetDialogFragment() {
         }
     }
 
-    fun setClickListener(list: MutableList<CountryItem>, selectedId: String, itemClick: (CountryItem) -> Unit) {
+    private fun updateViewColors() {
+        binding?.apply {
+            root.background.setTint(ContextCompat.getColor(context ?: return, backGroundColor))
+            etSearch.setTextColor(ContextCompat.getColor(context ?: return, textColor))
+            searchIconImageView.setColorFilter(
+                ContextCompat.getColor(
+                    context ?: return,
+                    searchIconColor
+                )
+            )
+            titleTextView.setTextColor(ContextCompat.getColor(context ?: return, textColor))
+            searchParent.background.setTint(ContextCompat.getColor(context ?: return, searchColor))
+        }
+    }
+
+    fun setViewsColors(backGroundColor: Int, textColor: Int, searchIconColor: Int,searchColor:Int) {
+        this.backGroundColor = backGroundColor
+        this.textColor = textColor
+        this.searchIconColor = searchIconColor
+        this.searchColor=searchColor
+    }
+
+    fun setClickListener(
+        list: MutableList<CountryItem>,
+        selectedId: String,
+        itemClick: (CountryItem) -> Unit
+    ) {
         this.itemClick = itemClick
         this.countryList = list
         this.selectedId = selectedId
@@ -82,9 +117,11 @@ class CountryListBottomSheet : BottomSheetDialogFragment() {
     override fun onStart() {
         super.onStart()
         dialog?.let {
-            val bottomSheet = it.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+            val bottomSheet =
+                it.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
             bottomSheet.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
         }
-        (dialog as BottomSheetDialog).behavior.peekHeight = requireContext().getDisplayHeightByPercent(85)
+        (dialog as BottomSheetDialog).behavior.peekHeight =
+            requireContext().getDisplayHeightByPercent(85)
     }
 }

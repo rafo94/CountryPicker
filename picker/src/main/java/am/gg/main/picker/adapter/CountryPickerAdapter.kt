@@ -5,6 +5,7 @@ import am.gg.main.picker.model.CountryItem
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 
@@ -14,7 +15,9 @@ import androidx.recyclerview.widget.RecyclerView
  */
 class CountryPickerAdapter(
     private val selectedId: String,
-    private val itemClick: (CountryItem) -> Unit
+    private val itemClick: (CountryItem) -> Unit,
+    private val itemBgColor: Int,
+    private val itemTextColor: Int
 ) : RecyclerView.Adapter<CountryPickerAdapter.ViewHolder>() {
 
     private var countryList: List<CountryItem> = listOf()
@@ -37,14 +40,23 @@ class CountryPickerAdapter(
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(private val binding: ItemCountryBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: ItemCountryBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CountryItem) {
+
             val countryInfo = "${item.countryName} ${item.phoneCode}"
             val selectedItem = selectedId.contains(item.codeName.toString())
             with(binding) {
                 tvCountryName.text = countryInfo
                 item.flagImage?.let { ivFlag.setImageResource(it) }
                 countrySelected.isVisible = selectedItem
+                root.background.setTint(ContextCompat.getColor(root.context ?: return, itemBgColor))
+                tvCountryName.setTextColor(
+                    ContextCompat.getColor(
+                        root.context ?: return,
+                        itemTextColor
+                    )
+                )
                 root.isSelected = selectedItem
                 root.setOnClickListener {
                     itemClick(item)
