@@ -11,9 +11,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -118,25 +118,20 @@ class CountryListBottomSheet : BottomSheetDialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.RoundedCornerTransparentBottomSheetDialogTheme)
-        bottomSheetDialog.apply {
-            behavior.isDraggable = true
-            behavior.isHideable = true
-            behavior.state = BottomSheetBehavior.STATE_EXPANDED
-            behavior.skipCollapsed = true
+        return object : BottomSheetDialog(requireContext(), R.style.RoundedCornerTransparentBottomSheetDialogTheme) {
+            override fun onAttachedToWindow() {
+                super.onAttachedToWindow()
+                window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
+            }
         }
-        return bottomSheetDialog
     }
 
     override fun onStart() {
         super.onStart()
-        val dialog = dialog as? BottomSheetDialog ?: return
-
-        dialog.let {
-            val bottomSheet =
-                it.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-            bottomSheet?.layoutParams?.height = ViewGroup.LayoutParams.MATCH_PARENT
+        dialog?.let {
+            val bottomSheet = it.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+            bottomSheet.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
         }
-        dialog.behavior.peekHeight = requireContext().getDisplayHeightByPercent(95)
+        (dialog as BottomSheetDialog).behavior.peekHeight = requireContext().getDisplayHeightByPercent(95)
     }
 }
