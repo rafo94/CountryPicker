@@ -51,7 +51,12 @@ class CountryPickerAdapter(
                 item.flagImage?.let { ivFlag.setImageResource(it) }
                 countrySelected.isVisible = selectedItem
                 root.background.setTint(ContextCompat.getColor(root.context ?: return, itemBgColor))
-                tvCountryName.setTextColor(ContextCompat.getColor(root.context ?: return, itemTextColor))
+                tvCountryName.setTextColor(
+                    ContextCompat.getColor(
+                        root.context ?: return,
+                        itemTextColor
+                    )
+                )
                 root.isSelected = selectedItem
                 root.setOnClickListener {
                     itemClick(item)

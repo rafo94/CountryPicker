@@ -41,7 +41,7 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) :
     private var backGroundColor: Int = 0
     private var textColor: Int = 0
     private var searchIconColor: Int = 0
-    private var searchColor:Int=0
+    private var searchColor: Int = 0
 
     private var itemClick: (CountryItem) -> Unit = { }
 
@@ -66,10 +66,16 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) :
                 textSize = getDimensionPixelSize(R.styleable.CountryCodePicker_textSize, 0)
                 arrowSize = getDimensionPixelSize(R.styleable.CountryCodePicker_arrowSize, 0)
                 arrowIvColor = getResourceId(R.styleable.CountryCodePicker_arrowColor, 0)
-                backGroundColor = getResourceId(R.styleable.CountryCodePicker_backGroundColor, R.color.white)
-                textColor = getResourceId(R.styleable.CountryCodePicker_textColor, R.color.primaryColor)
-                searchIconColor = getResourceId(R.styleable.CountryCodePicker_searchIconColor, R.color.primaryColor)
-                searchColor = getResourceId(R.styleable.CountryCodePicker_searchColor, R.color.primaryColor)
+                backGroundColor =
+                    getResourceId(R.styleable.CountryCodePicker_backGroundColor, R.color.white)
+                textColor =
+                    getResourceId(R.styleable.CountryCodePicker_textColor, R.color.primaryColor)
+                searchIconColor = getResourceId(
+                    R.styleable.CountryCodePicker_searchIconColor,
+                    R.color.primaryColor
+                )
+                searchColor =
+                    getResourceId(R.styleable.CountryCodePicker_searchColor, R.color.primaryColor)
             } finally {
                 recycle()
             }
@@ -123,7 +129,7 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) :
                         ) {
                             onCountryItemClick(it)
                         }
-                        setViewsColors(backGroundColor,textColor,searchIconColor,searchColor)
+                        setViewsColors(backGroundColor, textColor, searchIconColor, searchColor)
                     }.also {
                         unwrap(root.context)?.let { activity ->
                             it.show(activity.supportFragmentManager, it::class.java.simpleName)
