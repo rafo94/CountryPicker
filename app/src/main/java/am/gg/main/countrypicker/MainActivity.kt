@@ -38,13 +38,13 @@ class MainActivity : AppCompatActivity() {
             binding.progressButton.enable()
         }
 
-        val fragment = MainFragment.newInstance()
+        //val fragment = MainFragment.newInstance()
 
         binding.progressButton.setOnClickListener {
             //binding.progressButton.loading()
             //startProgress()
 
-            fragment.show(supportFragmentManager, fragment::class.java.simpleName)
+            //fragment.show(supportFragmentManager, fragment::class.java.simpleName)
         }
     }
 
