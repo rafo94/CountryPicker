@@ -42,7 +42,7 @@
         app:showFlag="false"
         app:showNameCode="false"
         app:showPhoneCode="true"
-        app:textColor="@color/white" />
+        app:itemsTextColor="@color/white" />
 
     <EditText
         android:id="@+id/numberEt"

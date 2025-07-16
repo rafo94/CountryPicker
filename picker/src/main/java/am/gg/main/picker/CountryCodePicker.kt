@@ -21,8 +21,29 @@ import java.util.Locale
 
 
 /**
- * Created by Rafik Gasparyan on 08.05.24
- * ggTeam
+ * `CountryCodePicker` is a custom Android [LinearLayout] that provides a UI element
+ * for selecting a country and its corresponding phone code.
+ *
+ * This view displays the selected country's flag, phone code, and/or country code name.
+ * Tapping on the view opens a [CountryListBottomSheet] which allows the user to search
+ * and select a country from a list.
+ *
+ *
+ * XML Attributes:
+ * - `showFlag`: (Boolean) Whether to display the country flag. Default is `true`.
+ * - `defaultNameCode`: (String) The ISO 3166-1 alpha-2 code of the country to be selected by default (e.g., "US").
+ * - `excludedCountries`: (String) A comma-separated list of ISO 3166-1 alpha-2 country codes to exclude from the list (e.g., "US,CA").
+ * - `showNameCode`: (Boolean) Whether to display the country's ISO code (e.g., "(US)"). Default is `true`.
+ * - `showPhoneCode`: (Boolean) Whether to display the country's phone code (e.g., "+1"). Default is `true`.
+ * - `showArrowDown`: (Boolean) Whether to display the dropdown arrow icon. Default is `true`.
+ * - `contentColor`: (Color Resource) The color of the text (phone code and country code name).
+ * - `android:fontFamily`: (Font Resource) The font family for the text.
+ * - `textSize`: (Dimension) The text size for the phone code and country code name.
+ * - `arrowSize`: (Dimension) The size of the dropdown arrow icon.
+ * - `arrowColor`: (Color Resource) The color of the dropdown arrow icon.
+ * - `backGroundColor`: (Color Resource) The background color of the [CountryListBottomSheet]. Default is `R.color.white`.
+ * - `countryTextColor`: (Color Resource) The text color for country names in the [CountryListBottomSheet]. Default is `R.color.primaryColor`.
+ * - `searchIconColor`: (Color Resource) The color of the search icon in the [CountryListBottomSheet]. Default is `R.color.primaryColor`.
  */
 class CountryCodePicker(context: Context, attributeSet: AttributeSet) :
     LinearLayout(context, attributeSet) {
@@ -40,7 +61,7 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) :
     private var arrowSize = 0
     private var arrowIvColor: Int = 0
     private var backGroundColor: Int = 0
-    private var textColor: Int = 0
+    private var itemsTextColor: Int = 0
     private var searchIconColor: Int = 0
     private var searchColor: Int = 0
 
@@ -69,8 +90,7 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) :
                 arrowIvColor = getResourceId(R.styleable.CountryCodePicker_arrowColor, 0)
                 backGroundColor =
                     getResourceId(R.styleable.CountryCodePicker_backGroundColor, R.color.white)
-                textColor =
-                    getResourceId(R.styleable.CountryCodePicker_textColor, R.color.primaryColor)
+                itemsTextColor = getResourceId(R.styleable.CountryCodePicker_itemsTextColor, R.color.primaryColor)
                 searchIconColor = getResourceId(
                     R.styleable.CountryCodePicker_searchIconColor,
                     R.color.primaryColor
@@ -130,7 +150,7 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) :
                         ) {
                             onCountryItemClick(it)
                         }
-                        setViewsColors(backGroundColor, textColor, searchIconColor, searchColor)
+                        setViewsColors(backGroundColor, itemsTextColor, searchIconColor, searchColor)
                     }.also {
                         unwrap(root.context)?.let { activity ->
                             it.show(activity.supportFragmentManager, it::class.java.simpleName)
@@ -168,6 +188,10 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) :
 
     fun setSearchBackgroundColor(@ColorRes color: Int) {
         searchColor = color
+    }
+
+    fun setItemsTextColor(@ColorRes color: Int) {
+        itemsTextColor = color
     }
 
     fun setArrowColor(@ColorRes color: Int) {
