@@ -12,7 +12,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -32,10 +34,18 @@ class CountryListBottomSheet : BottomSheetDialogFragment() {
     private var itemClick: (CountryItem) -> Unit = {}
     private var countryList = mutableListOf<CountryItem>()
     private val countrySortList = ArrayList<CountryItem>()
-    private var backGroundColor: Int = 0
-    private var textColor: Int = 0
-    private var searchIconColor: Int = 0
-    private var searchColor: Int = 0
+
+    @ColorRes
+    private var backgroundColor: Int = R.color.white
+
+    @ColorRes
+    private var textColor: Int = R.color.primaryColor
+
+    @ColorRes
+    private var searchIconColor: Int = R.color.primaryColor
+
+    @ColorRes
+    private var searchColor: Int = R.color.gray_1
 
 
     override fun onCreateView(
@@ -50,13 +60,18 @@ class CountryListBottomSheet : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (savedInstanceState != null || countryList.isEmpty()) {
+            view.isVisible = false
+            view.post { dismissAllowingStateLoss() }
+            return
+        }
         init()
     }
 
     private fun init() {
         adapter = CountryPickerAdapter(
             selectedId = selectedId ?: "AM",
-            itemBgColor = backGroundColor,
+            itemBgColor = backgroundColor,
             itemTextColor = textColor,
             itemClick = { item ->
                 itemClick(item)
@@ -86,25 +101,26 @@ class CountryListBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun updateViewColors() {
+        val ctx = context ?: return
         binding?.apply {
-            root.background.setTint(ContextCompat.getColor(context ?: return, backGroundColor))
-            etSearch.setTextColor(ContextCompat.getColor(context ?: return, textColor))
-            searchIconImageView.setColorFilter(
-                ContextCompat.getColor(
-                    context ?: return,
-                    searchIconColor
-                )
-            )
-            titleTextView.setTextColor(ContextCompat.getColor(context ?: return, textColor))
-            searchParent.background.setTint(ContextCompat.getColor(context ?: return, searchColor))
+            root.background?.setTint(ContextCompat.getColor(ctx, backgroundColor))
+            etSearch.setTextColor(ContextCompat.getColor(ctx, textColor))
+            searchIconImageView.setColorFilter(ContextCompat.getColor(ctx, searchIconColor))
+            titleTextView.setTextColor(ContextCompat.getColor(ctx, textColor))
+            searchParent.background?.setTint(ContextCompat.getColor(ctx, searchColor))
         }
     }
 
-    fun setViewsColors(backGroundColor: Int, textColor: Int, searchIconColor: Int, searchColor: Int) {
-        this.backGroundColor = backGroundColor
-        this.textColor = textColor
-        this.searchIconColor = searchIconColor
-        this.searchColor = searchColor
+    fun setViewsColors(
+        @ColorRes backGroundColor: Int,
+        @ColorRes textColor: Int,
+        @ColorRes searchIconColor: Int,
+        @ColorRes searchColor: Int
+    ) {
+        if (backGroundColor != 0) this.backgroundColor = backGroundColor
+        if (textColor != 0) this.textColor = textColor
+        if (searchIconColor != 0) this.searchIconColor = searchIconColor
+        if (searchColor != 0) this.searchColor = searchColor
     }
 
     fun setClickListener(
@@ -128,10 +144,16 @@ class CountryListBottomSheet : BottomSheetDialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        dialog?.let {
-            val bottomSheet = it.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-            bottomSheet.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
-        }
-        (dialog as BottomSheetDialog).behavior.peekHeight = requireContext().getDisplayHeightByPercent(95)
+        val bottomSheetDialog = dialog as? BottomSheetDialog ?: return
+        bottomSheetDialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+            ?.layoutParams?.height = ViewGroup.LayoutParams.MATCH_PARENT
+        val ctx = context ?: return
+        bottomSheetDialog.behavior.peekHeight = ctx.getDisplayHeightByPercent(95)
+    }
+
+    override fun onDestroyView() {
+        binding = null
+        adapter = null
+        super.onDestroyView()
     }
 }

@@ -60,10 +60,17 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) :
     private var textSize = 0
     private var arrowSize = 0
     private var arrowIvColor: Int = 0
-    private var backGroundColor: Int = 0
-    private var itemsTextColor: Int = 0
-    private var searchIconColor: Int = 0
-    private var searchColor: Int = 0
+    @ColorRes
+    private var backGroundColor: Int = R.color.white
+
+    @ColorRes
+    private var itemsTextColor: Int = R.color.primaryColor
+
+    @ColorRes
+    private var searchIconColor: Int = R.color.primaryColor
+
+    @ColorRes
+    private var searchColor: Int = R.color.gray_1
 
     private var itemClick: (CountryItem) -> Unit = { }
 
@@ -172,6 +179,7 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) :
     }
 
     fun setContentColor(@ColorRes color: Int) {
+        if (color == 0) return
         binding?.apply {
             phoneCodeTv.setTextColor(ContextCompat.getColor(context, color))
             codeNameTv.setTextColor(ContextCompat.getColor(context, color))
@@ -179,22 +187,27 @@ class CountryCodePicker(context: Context, attributeSet: AttributeSet) :
     }
 
     fun setBacGroundColor(@ColorRes color: Int) {
+        if (color == 0) return
         backGroundColor = color
     }
 
     fun setSearchIconColor(@ColorRes color: Int) {
+        if (color == 0) return
         searchIconColor = color
     }
 
     fun setSearchBackgroundColor(@ColorRes color: Int) {
+        if (color == 0) return
         searchColor = color
     }
 
     fun setItemsTextColor(@ColorRes color: Int) {
+        if (color == 0) return
         itemsTextColor = color
     }
 
     fun setArrowColor(@ColorRes color: Int) {
+        if (color == 0) return
         binding?.apply {
             arrowIv.setColorFilter(ContextCompat.getColor(context, color))
         }

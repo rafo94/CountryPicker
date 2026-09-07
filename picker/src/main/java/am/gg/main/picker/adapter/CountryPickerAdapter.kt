@@ -1,10 +1,12 @@
 package am.gg.main.picker.adapter
 
+import am.gg.main.picker.R
 import am.gg.main.picker.databinding.ItemCountryBinding
 import am.gg.main.picker.model.CountryItem
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -16,8 +18,8 @@ import androidx.recyclerview.widget.RecyclerView
 class CountryPickerAdapter(
     private val selectedId: String,
     private val itemClick: (CountryItem) -> Unit,
-    private val itemBgColor: Int,
-    private val itemTextColor: Int
+    @ColorRes private val itemBgColor: Int,
+    @ColorRes private val itemTextColor: Int
 ) : RecyclerView.Adapter<CountryPickerAdapter.ViewHolder>() {
 
     private var countryList: List<CountryItem> = listOf()
@@ -50,13 +52,10 @@ class CountryPickerAdapter(
                 tvCountryName.text = countryInfo
                 item.flagImage?.let { ivFlag.setImageResource(it) }
                 countrySelected.isVisible = selectedItem
-                root.background.setTint(ContextCompat.getColor(root.context ?: return, itemBgColor))
-                tvCountryName.setTextColor(
-                    ContextCompat.getColor(
-                        root.context ?: return,
-                        itemTextColor
-                    )
-                )
+                val bgColor = if (itemBgColor != 0) itemBgColor else R.color.white
+                val txtColor = if (itemTextColor != 0) itemTextColor else R.color.primaryColor
+                root.background?.setTint(ContextCompat.getColor(root.context, bgColor))
+                tvCountryName.setTextColor(ContextCompat.getColor(root.context, txtColor))
                 root.isSelected = selectedItem
                 root.setOnClickListener {
                     itemClick(item)
